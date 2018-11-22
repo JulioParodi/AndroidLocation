@@ -15,6 +15,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import com.facebook.stetho.Stetho
 
 
 import com.google.android.gms.location.*
@@ -43,6 +44,10 @@ class MainActivity : AppCompatActivity() {
     private var place = ArrayList<Location>()
     private var time = ArrayList<Long>()
 
+    var realSpeed : String = "0"
+    var longitude : String = "0"
+    var latitude : String = "0"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -57,6 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         //db = AppDatabase.getAppDataBase(context = this)
         //speedDao = db?.speedDao()
+        //Stetho.initializeWithDefaults(this)
 
         locationRequest = LocationRequest()
         locationRequest!!.interval = 1000 // use 10 ou 15 in real app  | 7500 before
@@ -110,12 +116,12 @@ class MainActivity : AppCompatActivity() {
 
                 val sdf = SimpleDateFormat("dd/M/yyyy \n hh:mm:ss")
                 val currentDate = sdf.format(Date()).toString()
-                val location : Location
+//                val location : Location
 
 
 
 
-                val speed1 = Speed(realSpeed = "${mySpeed.text}", mySpeed = "${editNum.text} km/h", currentDate = currentDate, longitude = tvLongitude.text.toString() , latitude = tvLatitude.text.toString() )
+                val speed1 = Speed(realSpeed = "${this.realSpeed} km/h", mySpeed = "${editNum.text} km/h", currentDate = currentDate, longitude = this.longitude , latitude = this.latitude )
                 GlobalScope.launch(Dispatchers.IO) { db.speedDao().insertSpeed(speed1) }
             }
            // finish()
@@ -130,10 +136,14 @@ class MainActivity : AppCompatActivity() {
                     //update UI
                     tvLongitude.text = location.latitude.toString()
                     tvLatitude.text = location.longitude.toString()
+                    longitude = location.longitude.toString()
+                    latitude = location.latitude.toString()
+
                     if (location.hasSpeed()){
                         tvSpeed.text = location.speed.toString()
+                        this.realSpeed = location.speed.toString()
                     }else{
-                        tvSpeed.text = "No Speed Available wtff"
+                        tvSpeed.text = "0"
                     }
                 }
             }
@@ -147,72 +157,76 @@ class MainActivity : AppCompatActivity() {
         locationCallback = object : LocationCallback(){
             override fun onLocationResult(p0: LocationResult?) {
                 super.onLocationResult(p0)
-                var seconds : Long
-                var speed : Double
-                val newTime = System.currentTimeMillis() / 1000
+//                var seconds : Long
+//                var speed : Double
+//                val newTime = System.currentTimeMillis() / 1000
                 //var located : Location
                 for (location in p0!!.locations){
                     //update UI
                     //located = location
                     if(location != null){
                         //update UI
-                        if(place.size == 0){
-                            place.add(location)
-                            time.add(System.currentTimeMillis() / 1000)
-                        }
-                        if (place.size > 0 && time[time.size-1] != newTime) { // era assim : (place.size > 0 && place[place.size-1] != location)
-                            place.add(location)
-                            time.add(System.currentTimeMillis() / 1000)
-                        }
-                        if(place.size > 2){
-                            //Toast.makeText(applicationContext, "Getting Speed", Toast.LENGTH_SHORT).show()
-                            seconds = time[time.size-1] - time[time.size-2]
-                            timeRelative.text = seconds.toString() + "segundos"
-                            speed = getSpeed(place[place.size-1], place[place.size-2], seconds)
-                            mySpeed.text = speed.toInt().toString() + " km/h"
-                            //Toast.makeText(applicationContext, "Getting Speed: "+speed.toString(), Toast.LENGTH_SHORT).show()
-                        }
+//                        if(place.size == 0){
+//                            place.add(location)
+//                            time.add(System.currentTimeMillis() / 1000)
+//                        }
+//                        if (place.size > 0 && time[time.size-1] != newTime) { // era assim : (place.size > 0 && place[place.size-1] != location)
+//                            place.add(location)
+//                            time.add(System.currentTimeMillis() / 1000)
+//                        }
+//                        if(place.size > 2){
+//                            //Toast.makeText(applicationContext, "Getting Speed", Toast.LENGTH_SHORT).show()
+//                            seconds = time[time.size-1] - time[time.size-2]
+//                            timeRelative.text = seconds.toString() + "segundos"
+//                            speed = getSpeed(place[place.size-1], place[place.size-2], seconds)
+//                            mySpeed.text = speed.toInt().toString() + " km/h"
+//                            //Toast.makeText(applicationContext, "Getting Speed: "+speed.toString(), Toast.LENGTH_SHORT).show()
+//                        }
 
                         tvLongitude.text = location.latitude.toString()
                         tvLatitude.text = location.longitude.toString()
+                        longitude = location.longitude.toString()
+                        latitude = location.latitude.toString()
                         if (location.hasSpeed()){
-                            tvSpeed.text = location.speed.toString()
+                            tvSpeed.text = (location.speed * 3.6).toInt().toString()
+                            realSpeed = (location.speed * 3.6).toInt().toString()
+
                         }else{
-                            tvSpeed.text = "No Speed Available"
+                            tvSpeed.text = "0"
                         }
                     }
                 }
             }
-            private fun getSpeed(location1 : Location, location2 : Location, seconds : Long) : Double{
-                var speed: Double
-                var distance = findDistanceTwoLocations(location1, location2)
-                //distanceWalk.text = distance.toString() + "metros"
-                //posInicial.text = location2.latitude.toString() + " / " + location2.longitude.toString()
-                //posFinal.text = location1.latitude.toString() + " / " + location1.longitude.toString()
-                speed = distance / seconds
-                //speed = round(speed)
-                if (speed < 1) {
-                    speed = 0.0
-                }
-                speed = speed * 3.6
-
-                return speed
-            }
-            private fun findDistanceTwoLocations(location1: Location, location2: Location): Double {
-
-
-                val earthRadius = 6371
-                var dLat = (location1.latitude - location2.latitude) * (Math.PI / 180.0)
-                var dLon = (location1.longitude - location2.longitude) * (Math.PI / 180.0)
-                var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                        Math.cos(Math.toRadians(location1.latitude)) * Math.cos(Math.toRadians(location1.latitude)) *
-                        Math.sin(dLon / 2) * Math.sin(dLon / 2)
-                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-                var dist = (earthRadius * c)
-                dist = dist * 1000
-                return dist
-
-            }
+//            private fun getSpeed(location1 : Location, location2 : Location, seconds : Long) : Double{
+//                var speed: Double
+//                var distance = findDistanceTwoLocations(location1, location2)
+//                //distanceWalk.text = distance.toString() + "metros"
+//                //posInicial.text = location2.latitude.toString() + " / " + location2.longitude.toString()
+//                //posFinal.text = location1.latitude.toString() + " / " + location1.longitude.toString()
+//                speed = distance / seconds
+//                //speed = round(speed)
+//                if (speed < 1) {
+//                    speed = 0.0
+//                }
+//                speed = speed * 3.6
+//
+//                return speed
+//            }
+//            private fun findDistanceTwoLocations(location1: Location, location2: Location): Double {
+//
+//
+//                val earthRadius = 6371
+//                var dLat = (location1.latitude - location2.latitude) * (Math.PI / 180.0)
+//                var dLon = (location1.longitude - location2.longitude) * (Math.PI / 180.0)
+//                var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+//                        Math.cos(Math.toRadians(location1.latitude)) * Math.cos(Math.toRadians(location1.latitude)) *
+//                        Math.sin(dLon / 2) * Math.sin(dLon / 2)
+//                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+//                var dist = (earthRadius * c)
+//                dist = dist * 1000
+//                return dist
+//
+//            }
         }
         startLocationUpdates()
     }
