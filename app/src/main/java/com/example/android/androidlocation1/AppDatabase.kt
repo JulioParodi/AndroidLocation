@@ -6,15 +6,13 @@ import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 
 @Database(entities = [Speed::class], version = 1)
-//@TypeConverters(DateTypeConverter::class)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun speedDao(): SpeedDao
 
-
     companion object {
         var INSTANCE: AppDatabase? = null
-        fun getAppDataBase(context: Context): AppDatabase? {
+        fun getAppDataBase(context: Context): AppDatabase {
             if (INSTANCE == null){
                 synchronized(AppDatabase::class){
                     INSTANCE = Room.databaseBuilder(
@@ -24,10 +22,11 @@ abstract class AppDatabase: RoomDatabase() {
                     ).build()
                 }
             }
-            return INSTANCE
+            return INSTANCE!!
         }
 
         fun destroyDataBase(){
+
             INSTANCE = null
         }
     }

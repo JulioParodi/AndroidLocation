@@ -1,5 +1,6 @@
 package com.example.android.androidlocation1
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 
 @Dao
@@ -17,6 +18,9 @@ interface SpeedDao {
     //@Query("SELECT * FROM Speed WHERE id == :id")
     //fun getGenderByName(name: String): List<Speed>
 
+    @Query ("DELETE FROM Speed")
+    fun dropDataBase()
+
     @Query("SELECT * FROM Speed")
-    fun getSpeeds(): List<Speed>
+    fun getSpeeds(): LiveData<List<Speed>>
 }

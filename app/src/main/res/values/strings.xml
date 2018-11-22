@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">AndroidLocation1</string>
+    <string name="app_name">AndroidLocation</string>
+    <string name="textAboutUs">Nós, Axel V. Rocha e Júlio Cesar P. Parodi, alunos do Curso de Ciência da Computação na Universidade Federal do Paraná, desenvolvemos este aplicativo como Trabalho Final da disciplina de Aplicativos Android (CI306), sob orientação do Professor Eduardo Todt.</string>
 </resources>

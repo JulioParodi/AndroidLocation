@@ -1,20 +1,30 @@
 package com.example.android.androidlocation1
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 
 
 import com.google.android.gms.location.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.GlobalScope
+import kotlinx.coroutines.experimental.IO
 import kotlinx.coroutines.experimental.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +46,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val actionbar = supportActionBar
+        //set actionbar title
+        actionbar!!.title = "Android Location"
+
+        //set back button
+        //actionbar.setDisplayHomeAsUpEnabled(true)
+
 
         //db = AppDatabase.getAppDataBase(context = this)
         //speedDao = db?.speedDao()
@@ -82,17 +100,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
         sendBttn.setOnClickListener {
 
+            if (editNum.text.isBlank()) {
+                //setResult(Activity.RESULT_CANCELED, replyIntent)
+            } else {
+                val db = AppDatabase.getAppDataBase(context = this)
+
+                val sdf = SimpleDateFormat("dd/M/yyyy \n hh:mm:ss")
+                val currentDate = sdf.format(Date()).toString()
+                val location : Location
 
 
-            var speed1 = Speed(realSpeed = "${tvSpeed.text}", mySpeed = "60")
 
-            GlobalScope.launch {
-                speedDao?.insertSpeed(speed1)
+
+                val speed1 = Speed(realSpeed = "${mySpeed.text}", mySpeed = "${editNum.text} km/h", currentDate = currentDate, longitude = tvLongitude.text.toString() , latitude = tvLatitude.text.toString() )
+                GlobalScope.launch(Dispatchers.IO) { db.speedDao().insertSpeed(speed1) }
             }
+           // finish()
             editNum.text = null
         }
+
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -140,7 +169,7 @@ class MainActivity : AppCompatActivity() {
                             seconds = time[time.size-1] - time[time.size-2]
                             timeRelative.text = seconds.toString() + "segundos"
                             speed = getSpeed(place[place.size-1], place[place.size-2], seconds)
-                            mySpeed.text = speed.toString() + " m/s"
+                            mySpeed.text = speed.toInt().toString() + " km/h"
                             //Toast.makeText(applicationContext, "Getting Speed: "+speed.toString(), Toast.LENGTH_SHORT).show()
                         }
 
@@ -162,9 +191,16 @@ class MainActivity : AppCompatActivity() {
                 //posFinal.text = location1.latitude.toString() + " / " + location1.longitude.toString()
                 speed = distance / seconds
                 //speed = round(speed)
+                if (speed < 1) {
+                    speed = 0.0
+                }
+                speed = speed * 3.6
+
                 return speed
             }
             private fun findDistanceTwoLocations(location1: Location, location2: Location): Double {
+
+
                 val earthRadius = 6371
                 var dLat = (location1.latitude - location2.latitude) * (Math.PI / 180.0)
                 var dLon = (location1.longitude - location2.longitude) * (Math.PI / 180.0)
@@ -175,10 +211,45 @@ class MainActivity : AppCompatActivity() {
                 var dist = (earthRadius * c)
                 dist = dist * 1000
                 return dist
+
             }
         }
         startLocationUpdates()
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here.
+        val id = item.getItemId()
+
+        if (id == R.id.action_one) {
+            val intent = Intent(this, HistoricActivity::class.java)
+            startActivity(intent)
+        }
+        if (id == R.id.action_two) {
+            val intent = Intent(this, AboutUsActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        return super.onOptionsItemSelected(item)
+
+    }
+
+//    override fun onSupportNavigateUp(): Boolean {
+//        onBackPressed()
+//        return true
+//    }
+//
+//    companion object {
+//        const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
+//    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -217,6 +288,7 @@ class MainActivity : AppCompatActivity() {
     private fun stopLocationUpdates() {
         fusedLocationProviderClient!!.removeLocationUpdates(locationCallback)
     }
+
 }
 
 
