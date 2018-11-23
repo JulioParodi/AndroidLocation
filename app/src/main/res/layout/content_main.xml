@@ -8,7 +8,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <TextView
-                android:text="Date"
+                android:text="@string/date"
                 android:layout_width="42dp"
                 android:layout_height="wrap_content" android:id="@+id/textView"
                 android:layout_marginLeft="10dp" android:layout_marginBottom="10dp"
@@ -17,7 +17,7 @@
                 android:layout_marginStart="30dp"
         />
         <TextView
-                android:text="MySpeed"
+                android:text="@string/myspeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/textView2"
                 android:layout_marginBottom="10dp"
@@ -26,7 +26,7 @@
                 android:layout_marginStart="40dp" android:layout_marginTop="10dp"
                 android:background="?android:attr/colorBackground"/>
         <TextView
-                android:text="RealSpeed"
+                android:text="@string/realspeed"
                 android:layout_width="91dp" android:layout_marginBottom="10dp" android:layout_marginEnd="10dp"
                 android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
                 android:layout_marginStart="42dp" android:layout_marginTop="10dp"
@@ -49,7 +49,7 @@
             </android.support.v7.widget.RecyclerView>
 
             <Button
-                    android:text="Delete DataBase"
+                    android:text="@string/delete_database"
                     android:layout_width="396dp"
                     android:layout_height="wrap_content" android:id="@+id/bttnDeleteDataBase"/>
         </LinearLayout>

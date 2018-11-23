@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">AndroidLocation</string>
     <string name="textAboutUs">Nós, Axel V. Rocha e Júlio Cesar P. Parodi, alunos do Curso de Ciência da Computação na Universidade Federal do Paraná, desenvolvemos este aplicativo como Trabalho Final da disciplina de Aplicativos Android (CI306), sob orientação do Professor Eduardo Todt.</string>
-    <string name="send">Enviar</string>
-    <string name="date">Data</string>
-    <string name="myspeed">MinhaVelocidade</string>
-    <string name="realspeed">RealVelocidade</string>
-    <string name="delete_database">Delete Histórico</string>
+    <string name="send">Send</string>
+    <string name="date">Date</string>
+    <string name="myspeed">MySpeed</string>
+    <string name="realspeed">RealSpeed</string>
+    <string name="delete_database">Delete DataBase</string>
 </resources>

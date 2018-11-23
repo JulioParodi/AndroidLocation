@@ -23,3 +23,4 @@ class HelpActivity : AppCompatActivity() {
         return true
     }
 }
+

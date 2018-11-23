@@ -247,7 +247,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         if (id == R.id.action_two) {
-            val intent = Intent(this, AboutUsActivity::class.java)
+            val intent = Intent(this, HelpActivity::class.java)
             startActivity(intent)
         }
 
@@ -272,7 +272,7 @@ class MainActivity : AppCompatActivity() {
                 if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     //permission granted, do nothing
                 }else{
-                    Toast.makeText(applicationContext, "Ative a Locatizacao,, eh necessario", Toast.LENGTH_SHORT)
+                    Toast.makeText(applicationContext, "Ative a Locatizacao, eh necessario", Toast.LENGTH_SHORT)
                     finish()
                 }
         }
