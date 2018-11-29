@@ -134,7 +134,7 @@ class HistoricActivity : AppCompatActivity() {
             }
             //Write text to file!
             
-            File(path, "dataBaseAndroidLocation.csv").writeText(text)
+            File(path, "relatorioWhatSpeedIsIt.csv").writeText(text)
 
 
             Toast.makeText(this, "A message was written to your file!", Toast.LENGTH_SHORT).show()
