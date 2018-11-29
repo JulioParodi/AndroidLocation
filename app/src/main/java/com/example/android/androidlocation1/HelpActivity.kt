@@ -11,7 +11,7 @@ class HelpActivity : AppCompatActivity() {
         //actionbar
         val actionbar = supportActionBar
         //set actionbar title
-        actionbar!!.title = "Help"
+        actionbar!!.title = getString(R.string.titleHelpActivity)
 
         //set back button
         actionbar.setDisplayHomeAsUpEnabled(true)

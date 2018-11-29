@@ -1,9 +1,27 @@
 <resources>
-    <string name="app_name">AndroidLocation</string>
-    <string name="textAboutUs">Nós, Axel V. Rocha e Júlio Cesar P. Parodi, alunos do Curso de Ciência da Computação na Universidade Federal do Paraná, desenvolvemos este aplicativo como Trabalho Final da disciplina de Aplicativos Android (CI306), sob orientação do Professor Eduardo Todt.</string>
+    <string name="app_name">WhatSpeedIsIt</string>
+    <string name="textAboutUs"><br>    Este Aplicativo foi feito com o intuito te medir a percepção humana em relação a sua velocidade. Funciona da seguinte maneira: o smarphone registra as velocidades , e ao responder a pergunta é salvo no banco de dados a velocidade digitada pelo usuário e a velocidade real. Desta maneira, pode-se gerar um relatório, que conterá as infomações antes mencionadas, junto com a localização e hora de quando foram coletadas.\n</br>
+        <br> Nós, Axel V. Rocha e Júlio Cesar P. Parodi, alunos do Curso de Ciência da Computação na Universidade Federal do Paraná, desenvolvemos este aplicativo como Trabalho Final da disciplina de Aplicativos Android (CI306), sob orientação do Professor Eduardo Todt\n</br>
+        <br>Quaiser dúvidas, sugestões ou perguntas, entre em contato conosco. \n</br>
+        <br>email: axel.rocha@ufpr.br\n</br>
+        <br>email: juliopepplow@ufpr.br \n</br> </string>
     <string name="send">Enviar</string>
     <string name="date">Data</string>
-    <string name="myspeed">MinhaVelocidade</string>
-    <string name="realspeed">RealVelocidade</string>
-    <string name="delete_database">Delete Histórico</string>
+    <string name="myspeed">MinhaVel.</string>
+    <string name="realspeed">RealVel.</string>
+    <string name="delete_database">Deletar Histórico</string>
+    <string name="titleHistoricActivity">Histórico</string>
+    <string name="titleHelpActivity">Ajuda</string>
+    <string name="titleHistoryMenu">Histórico</string>
+    <string name="titleHelpMenu">Ajuda</string>
+    <string name="titleAlertHistoricActivity">Deletar banco de dados</string>
+    <string name="messageAlertHistoricActivity">Deseja apagar todos os dados do histórico?</string>
+    <string name="titleButtnAlertHistoricActivity">SIM</string>
+    <string name="titleBttnNegativeAlertHistoricActivity">NAO</string>
+    <string name="afterPositiveAlertHistoricActivity">Todos os dados foram apagados.</string>
+    <string name="afterNegativeAlertHistoricActivity">Dados não foram apagados</string>
+    <string name="titleEnableSpeedMenu">Mostrar velocidade</string>
+    <string name="titleSpeedMainActivity">Velocidade</string>
+    <string name="titleQuestionMainActivity">Qual a sua Velocidade ?</string>
+    <string name="export_databaseHistoryActivity">Exportar DataBase</string>
 </resources>

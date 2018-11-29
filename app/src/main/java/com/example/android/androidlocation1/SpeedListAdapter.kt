@@ -12,7 +12,7 @@ class SpeedListAdapter internal constructor(
 ) : RecyclerView.Adapter<SpeedListAdapter.SpeedViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var speeds = emptyList<Speed>() // Cached copy of words
+    var speeds = emptyList<Speed>() // Cached copy of words
 
     inner class SpeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewMySpeed: TextView = itemView.findViewById(R.id.textViewMySpeed)
@@ -29,7 +29,7 @@ class SpeedListAdapter internal constructor(
         val current = speeds[position]
         holder.textViewMySpeed.text = current.mySpeed
         holder.textViewRealSpeed.text = current.realSpeed
-        holder.textViewDate.text = current.currentDate
+        holder.textViewDate.text = current.currentDate.replace("-","\n")
     }
 
     internal fun setSpeeds(speeds: List<Speed>) {

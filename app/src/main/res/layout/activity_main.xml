@@ -7,181 +7,58 @@
                                              tools:context=".MainActivity">
 
     <TextView
-            android:id="@+id/latitudeTag"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="Latitude"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/longitudeTag" />
-
-    <TextView
-            android:id="@+id/tvLongitude"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:text="0.0 / 0.0"
-            android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@+id/longitudeTag"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-            android:id="@+id/longitudeTag"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Longitude"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-            android:id="@+id/tvLatitude"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="0.0 / 0.0"
-            android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@+id/latitudeTag"
-            app:layout_constraintTop_toBottomOf="@+id/tvLongitude" />
-
-    <TextView
             android:id="@+id/speedTag"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="Speed"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/latitudeTag" />
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/tvSpeed"
+            android:layout_marginEnd="5dp" app:layout_constraintHorizontal_bias="0.689"
+            android:layout_marginBottom="68dp" app:layout_constraintBottom_toBottomOf="parent" android:text="@string/titleSpeedMainActivity"/>
 
     <TextView
             android:id="@+id/tvSpeed"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="20dp"
             android:text="0 m/s"
             android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@+id/speedTag"
-            app:layout_constraintTop_toBottomOf="@+id/tvLatitude" />
-
-    <ToggleButton
-            android:id="@+id/tb_LocationOnOff"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:text="ToggleButton"
-            android:textOff="Show Informations"
-            android:textOn="Hide Informations"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-            android:id="@+id/mySpeedTag"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="MySpeed"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/speedTag" />
-
-    <TextView
-            android:id="@+id/mySpeed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:text="0 km/h"
-            android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@+id/mySpeedTag"
-            app:layout_constraintTop_toBottomOf="@+id/tvSpeed"/>
-
-    <TextView
-            android:id="@+id/dWalkedTag"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:text="DistanceWalked"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mySpeedTag" />
-
-    <TextView
-            android:id="@+id/distanceWalk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
-            android:text="0 meters"
-            android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@+id/dWalkedTag"
-            app:layout_constraintTop_toBottomOf="@+id/mySpeed" />
-
-    <TextView
-            android:id="@+id/tRelativeTag"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="TimeRelative"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dWalkedTag" />
-
-    <TextView
-            android:id="@+id/timeRelative"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:text="0 seconds"
-            android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@+id/tRelativeTag"
-            app:layout_constraintTop_toBottomOf="@+id/distanceWalk" />
+            android:layout_marginBottom="64dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.501"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/sendBttn"
+            app:layout_constraintVertical_bias="0.953"/>
 
     <Button
             android:id="@+id/sendBttn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:text="@string/send"
-            app:layout_constraintBottom_toTopOf="@+id/tb_LocationOnOff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeRelative" app:layout_constraintVertical_bias="0.299"/>
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/editNum" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintVertical_bias="0.247"/>
 
     <EditText
             android:id="@+id/editNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="130dp"
+            android:layout_height="43dp"
             android:ems="10"
             android:inputType="number"
-            app:layout_constraintBottom_toTopOf="@+id/sendBttn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeRelative"
-            app:layout_constraintVertical_bias="1.0"
-            />
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent" android:cursorVisible="false"
+            android:gravity="center"/>
+    <TextView
+            android:text="@string/titleQuestionMainActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3" android:textSize="24sp"
+            android:textStyle="bold" android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/editNum" app:layout_constraintVertical_bias="0.661"/>
 
 </android.support.constraint.ConstraintLayout>

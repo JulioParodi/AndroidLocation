@@ -2,9 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
             android:id="@+id/action_one"
-            android:title="History"/>
+            android:title="@string/titleHistoryMenu"/>
+
+    <item
+        android:id="@+id/action_three"
+        android:title="@string/titleEnableSpeedMenu"/>
     <item
             android:id="@+id/action_two"
-            android:title="Help"/>
+            android:title="@string/titleHelpMenu"/>
 
 </menu>

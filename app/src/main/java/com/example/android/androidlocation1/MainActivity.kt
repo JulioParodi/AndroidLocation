@@ -31,18 +31,14 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
 
-    //private var db: AppDatabase? = null
-    //private var speedDao: SpeedDao? = null
-
-
     private var fusedLocationProviderClient : FusedLocationProviderClient?  = null
     private val MY_PERMISSION_FINE_LOCATION = 101
     private var locationRequest : LocationRequest? = null
     private var updatesOn = true
     private var locationCallback : LocationCallback? = null
 
-    private var place = ArrayList<Location>()
-    private var time = ArrayList<Long>()
+//    private var place = ArrayList<Location>()
+//    private var time = ArrayList<Long>()
 
     var realSpeed : String = "0"
     var longitude : String = "0"
@@ -53,16 +49,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val actionbar = supportActionBar
-        //set actionbar title
-        actionbar!!.title = "Android Location"
-
-        //set back button
-        //actionbar.setDisplayHomeAsUpEnabled(true)
-
-
-        //db = AppDatabase.getAppDataBase(context = this)
-        //speedDao = db?.speedDao()
-        //Stetho.initializeWithDefaults(this)
+        actionbar!!.title = "What Speed Is It"
 
         locationRequest = LocationRequest()
         locationRequest!!.interval = 1000 // use 10 ou 15 in real app  | 7500 before
@@ -70,61 +57,53 @@ class MainActivity : AppCompatActivity() {
         locationRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
 
 
-        tb_LocationOnOff.setOnClickListener {
-            if(tb_LocationOnOff.isChecked){
-                Toast.makeText(this, "ON", Toast.LENGTH_SHORT)
-                longitudeTag.visibility = View.VISIBLE
-                tvLongitude.visibility = View.VISIBLE
-                latitudeTag.visibility = View.VISIBLE
-                tvLatitude.visibility = View.VISIBLE
-                speedTag.visibility = View.VISIBLE
-                tvSpeed.visibility = View.VISIBLE
-                mySpeedTag.visibility = View.VISIBLE
-                mySpeed.visibility = View.VISIBLE
-                dWalkedTag.visibility = View.VISIBLE
-                distanceWalk.visibility = View.VISIBLE
-                tRelativeTag.visibility = View.VISIBLE
-                timeRelative.visibility = View.VISIBLE
-                //updatesOn = true
-                //startLocationUpdates()
-            }else{
-                Toast.makeText(this, "OFF", Toast.LENGTH_SHORT)
-                longitudeTag.visibility = View.INVISIBLE
-                tvLongitude.visibility = View.INVISIBLE
-                latitudeTag.visibility = View.INVISIBLE
-                tvLatitude.visibility = View.INVISIBLE
-                speedTag.visibility = View.INVISIBLE
-                tvSpeed.visibility = View.INVISIBLE
-                mySpeedTag.visibility = View.INVISIBLE
-                mySpeed.visibility = View.INVISIBLE
-                dWalkedTag.visibility = View.INVISIBLE
-                distanceWalk.visibility = View.INVISIBLE
-                tRelativeTag.visibility = View.INVISIBLE
-                timeRelative.visibility = View.INVISIBLE
-                //updatesOn = false
-                //stopLocationUpdates()
-            }
-        }
+//        tb_LocationOnOff.setOnClickListener {
+//            if(tb_LocationOnOff.isChecked){
+//                Toast.makeText(this, "ON", Toast.LENGTH_SHORT)
+//                longitudeTag.visibility = View.VISIBLE
+//                tvLongitude.visibility = View.VISIBLE
+//                latitudeTag.visibility = View.VISIBLE
+//                tvLatitude.visibility = View.VISIBLE
+//                speedTag.visibility = View.VISIBLE
+//                tvSpeed.visibility = View.VISIBLE
+//                mySpeedTag.visibility = View.VISIBLE
+//                mySpeed.visibility = View.VISIBLE
+//                dWalkedTag.visibility = View.VISIBLE
+//                distanceWalk.visibility = View.VISIBLE
+//                tRelativeTag.visibility = View.VISIBLE
+//                timeRelative.visibility = View.VISIBLE
+//
+//            }else{
+//                Toast.makeText(this, "OFF", Toast.LENGTH_SHORT)
+//                longitudeTag.visibility = View.INVISIBLE
+//                tvLongitude.visibility = View.INVISIBLE
+//                latitudeTag.visibility = View.INVISIBLE
+//                tvLatitude.visibility = View.INVISIBLE
+//                speedTag.visibility = View.INVISIBLE
+//                tvSpeed.visibility = View.INVISIBLE
+//                mySpeedTag.visibility = View.INVISIBLE
+//                mySpeed.visibility = View.INVISIBLE
+//                dWalkedTag.visibility = View.INVISIBLE
+//                distanceWalk.visibility = View.INVISIBLE
+//                tRelativeTag.visibility = View.INVISIBLE
+//                timeRelative.visibility = View.INVISIBLE
+//
+//            }
+//        }
 
 
         sendBttn.setOnClickListener {
 
             if (editNum.text.isBlank()) {
-                //setResult(Activity.RESULT_CANCELED, replyIntent)
+
             } else {
                 val db = AppDatabase.getAppDataBase(context = this)
-
-                val sdf = SimpleDateFormat("dd/M/yyyy \n hh:mm:ss")
+                val sdf = SimpleDateFormat("dd/M/yyyy-hh:mm:ss")
                 val currentDate = sdf.format(Date()).toString()
-//                val location : Location
-
-
-
-
                 val speed1 = Speed(realSpeed = "${this.realSpeed} km/h", mySpeed = "${editNum.text} km/h", currentDate = currentDate, longitude = this.longitude , latitude = this.latitude )
                 GlobalScope.launch(Dispatchers.IO) { db.speedDao().insertSpeed(speed1) }
             }
-           // finish()
+
             editNum.text = null
         }
 
@@ -134,8 +113,8 @@ class MainActivity : AppCompatActivity() {
             fusedLocationProviderClient!!.lastLocation.addOnSuccessListener { location ->
                 if(location != null){
                     //update UI
-                    tvLongitude.text = location.latitude.toString()
-                    tvLatitude.text = location.longitude.toString()
+//                    tvLongitude.text = location.latitude.toString()
+//                    tvLatitude.text = location.longitude.toString()
                     longitude = location.longitude.toString()
                     latitude = location.latitude.toString()
 
@@ -157,76 +136,23 @@ class MainActivity : AppCompatActivity() {
         locationCallback = object : LocationCallback(){
             override fun onLocationResult(p0: LocationResult?) {
                 super.onLocationResult(p0)
-//                var seconds : Long
-//                var speed : Double
-//                val newTime = System.currentTimeMillis() / 1000
-                //var located : Location
                 for (location in p0!!.locations){
-                    //update UI
-                    //located = location
                     if(location != null){
-                        //update UI
-//                        if(place.size == 0){
-//                            place.add(location)
-//                            time.add(System.currentTimeMillis() / 1000)
-//                        }
-//                        if (place.size > 0 && time[time.size-1] != newTime) { // era assim : (place.size > 0 && place[place.size-1] != location)
-//                            place.add(location)
-//                            time.add(System.currentTimeMillis() / 1000)
-//                        }
-//                        if(place.size > 2){
-//                            //Toast.makeText(applicationContext, "Getting Speed", Toast.LENGTH_SHORT).show()
-//                            seconds = time[time.size-1] - time[time.size-2]
-//                            timeRelative.text = seconds.toString() + "segundos"
-//                            speed = getSpeed(place[place.size-1], place[place.size-2], seconds)
-//                            mySpeed.text = speed.toInt().toString() + " km/h"
-//                            //Toast.makeText(applicationContext, "Getting Speed: "+speed.toString(), Toast.LENGTH_SHORT).show()
-//                        }
-
-                        tvLongitude.text = location.latitude.toString()
-                        tvLatitude.text = location.longitude.toString()
+//                        tvLongitude.text = location.latitude.toString()
+//                        tvLatitude.text = location.longitude.toString()
                         longitude = location.longitude.toString()
                         latitude = location.latitude.toString()
                         if (location.hasSpeed()){
-                            tvSpeed.text = (location.speed * 3.6).toInt().toString()
+                            tvSpeed.text = (location.speed * 3.6).toInt().toString() + " km/h"
                             realSpeed = (location.speed * 3.6).toInt().toString()
 
                         }else{
-                            tvSpeed.text = "0"
+                            tvSpeed.text = "0" + " km/h"
                         }
                     }
                 }
             }
-//            private fun getSpeed(location1 : Location, location2 : Location, seconds : Long) : Double{
-//                var speed: Double
-//                var distance = findDistanceTwoLocations(location1, location2)
-//                //distanceWalk.text = distance.toString() + "metros"
-//                //posInicial.text = location2.latitude.toString() + " / " + location2.longitude.toString()
-//                //posFinal.text = location1.latitude.toString() + " / " + location1.longitude.toString()
-//                speed = distance / seconds
-//                //speed = round(speed)
-//                if (speed < 1) {
-//                    speed = 0.0
-//                }
-//                speed = speed * 3.6
 //
-//                return speed
-//            }
-//            private fun findDistanceTwoLocations(location1: Location, location2: Location): Double {
-//
-//
-//                val earthRadius = 6371
-//                var dLat = (location1.latitude - location2.latitude) * (Math.PI / 180.0)
-//                var dLon = (location1.longitude - location2.longitude) * (Math.PI / 180.0)
-//                var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-//                        Math.cos(Math.toRadians(location1.latitude)) * Math.cos(Math.toRadians(location1.latitude)) *
-//                        Math.sin(dLon / 2) * Math.sin(dLon / 2)
-//                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-//                var dist = (earthRadius * c)
-//                dist = dist * 1000
-//                return dist
-//
-//            }
         }
         startLocationUpdates()
     }
@@ -250,20 +176,24 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, HelpActivity::class.java)
             startActivity(intent)
         }
+        if (id == R.id.action_three) {
+                if (speedTag.visibility == View.VISIBLE){
+                    speedTag.visibility = View.INVISIBLE
+                    tvSpeed.visibility = View.INVISIBLE
+
+
+                } else {
+                    tvSpeed.visibility = View.VISIBLE
+                    speedTag.visibility = View.VISIBLE
+                }
+//
+        }
 
 
         return super.onOptionsItemSelected(item)
 
     }
 
-//    override fun onSupportNavigateUp(): Boolean {
-//        onBackPressed()
-//        return true
-//    }
-//
-//    companion object {
-//        const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
-//    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)

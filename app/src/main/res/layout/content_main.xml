@@ -48,10 +48,21 @@
                     tools:listitem="@layout/recyclerview_item">
             </android.support.v7.widget.RecyclerView>
 
-            <Button
-                    android:text="@string/delete_database"
-                    android:layout_width="396dp"
-                    android:layout_height="wrap_content" android:id="@+id/bttnDeleteDataBase"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <Button
+                        android:text="@string/delete_database"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content" android:id="@+id/bttnDeleteDataBase"
+                        android:layout_marginStart="30dp" android:layout_marginTop="10dp"/>
+                <Button
+                        android:text="@string/export_databaseHistoryActivity"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content" android:id="@+id/bttnExportDataBase"
+                        android:layout_marginStart="10dp" android:layout_marginTop="10dp"/>
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>

@@ -1,9 +1,28 @@
 <resources>
-    <string name="app_name">AndroidLocation</string>
-    <string name="textAboutUs">Nós, Axel V. Rocha e Júlio Cesar P. Parodi, alunos do Curso de Ciência da Computação na Universidade Federal do Paraná, desenvolvemos este aplicativo como Trabalho Final da disciplina de Aplicativos Android (CI306), sob orientação do Professor Eduardo Todt.</string>
+    <string name="app_name">WhatSpeedIsIt</string>
+    <string name="textAboutUs"><br> Este Aplicativo foi feito com o intuito te medir a percepção humana em relação a sua velocidade. Funciona da seguinte maneira: o smarphone registra as velocidades , e ao responder a pergunta é salvo no banco de dados a velocidade digitada pelo usuário e a velocidade real. Desta maneira, pode-se gerar um relatório, que conterá as infomações antes mencionadas, junto com a localização e hora de quando foram coletadas.\n</br>
+        <br> Nós, Axel V. Rocha e Júlio Cesar P. Parodi, alunos do Curso de Ciência da Computação na Universidade Federal do Paraná, desenvolvemos este aplicativo como Trabalho Final da disciplina de Aplicativos Android (CI306), sob orientação do Professor Eduardo Todt\n</br>
+        <br>Quaiser dúvidas, sugestões ou perguntas, entre em contato conosco. \n</br>
+        <br>email: axel.rocha@ufpr.br\n</br>
+        <br>email: juliopepplow@ufpr.br \n</br></string>
     <string name="send">Send</string>
     <string name="date">Date</string>
     <string name="myspeed">MySpeed</string>
     <string name="realspeed">RealSpeed</string>
     <string name="delete_database">Delete DataBase</string>
+    <string name="titleHistoricActivity">History</string>
+    <string name="titleHelpActivity">Help</string>
+    <string name="titleHistoryMenu">History</string>
+    <string name="titleHelpMenu">Help</string>
+    <string name="titleAlertHistoricActivity">Delete DataBase</string>
+    <string name="messageAlertHistoricActivity">Do you want delete database?</string>
+    <string name="titleButtnAlertHistoricActivity">YES</string>
+    <string name="titleBttnNegativeAlertHistoricActivity">NO</string>
+    <string name="afterPositiveAlertHistoricActivity">All data has been deleted.</string>
+    <string name="afterNegativeAlertHistoricActivity">The data was not deleted</string>
+    <string name="titleEnableSpeedMenu">Show speed</string>
+    <string name="titleSpeedMainActivity">Speed</string>
+    <string name="titleQuestionMainActivity">What\'s your speed ?</string>
+    <string name="export_databaseHistoryActivity">Export DataBase</string>
+
 </resources>
